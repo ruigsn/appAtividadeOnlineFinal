@@ -1,0 +1,24 @@
+const produtoFormulario = document.getElementById('produtoFormulario');
+const objectId = // Insira aqui o ID do objeto que deseja atualizar;
+
+produtoFormulario.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const nomeProduto = document.getElementById('nome').value;
+  const descricaoProduto = document.getElementById('descricao').value;
+  const precoProduto = document.getElementById('preco').value;
+
+  const myObject = new Parse.Object('Produto');
+  myObject.set('objectId', objectId); // Define o ID do objeto que deseja atualizar
+  myObject.set('nome', nomeProduto);
+  myObject.set('descricao', descricaoProduto);
+  myObject.set('preco', precoProduto);
+
+  try {
+    const result = await myObject.save(null, { method: 'PUT' }); // Configura o método PUT
+    console.log('Produto atualizado com sucesso', result);
+    window.location.href = '../telas/sucesso.html';
+  } catch (error) {
+    console.error('Error while updating Produto: ', error);
+    window.location.href = '../telas/erro.html';
+  }
+});

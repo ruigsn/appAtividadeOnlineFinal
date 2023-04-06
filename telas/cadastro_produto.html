@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Aplicação - Cadastrar Produtos</title>
+<<<<<<< HEAD
+  <link rel="stylesheet" href="../assets/css/cadastrar_cliente.css">
+=======
+  <link rel="stylesheet" href="../assets/css/cadastrar_produtos.css">
+>>>>>>> origin/main
+	<script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+</head>
+<body>
+  <header>
+		<h1>Minha Aplicação - Cadastrar Cliente</h1>
+	</header>
+	<nav>
+		<ul>
+			<li><a href="clientes.html">Clientes</a></li>
+			<li><a href="produtos.html">Produtos</a></li>
+			<li><a href="compras.html">Compras</a></li>
+		</ul>
+	</nav>
+	<main>
+		<h2>Cadastrar Produtos</h2>
+
+		<form id="meuFormulario" action="" method="post">
+			<label for="nome">Nome:</label>
+			<input type="text" id="nome" name="nome" required>
+
+			<label for="text">Descrição:</label>
+			<input type="text" id="descricao" name="descricao" required>
+
+			<label for="preco">Preço:</label>
+			<input type="text" id="preco" name="preco" required>
+
+			<button type="submit">Cadastrar</button>
+		</form>
+	</main>
+	<footer>
+		<p>Desenvolvido por Equipe ADS</p>
+	</footer>
+
+
+
+<script>
+Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
+// Remember to inform BOTH the Back4App Application ID AND the JavaScript KEY
+Parse.initialize(
+  'sIdnfotzGcpvsSYLgKVYehWTFAtEpVs9uC6N6ciH', // This is your Application ID
+  'HhMUQhtryM2RuNR4drEV0jfU4kBDwaVA4eDjOMZw' // This is your Javascript key
+);
+
+<<<<<<< HEAD
+const produtoFormulario = document.getElementById('meuFormulario');
+=======
+const produtoFormulario = document.getElementById('produtoFormulario');
+>>>>>>> origin/main
+
+meuFormulario.addEventListener('submit', async (event) => {
+	event.preventDefault();
+	const nomeProduto = document.getElementById('nome').value;
+	const descricaoProduto = document.getElementById('descricao').value;
+          const precoProduto = document.getElementById('preco').value;
+
+	const myNewObject = new Parse.Object('Produto');
+  myNewObject.set('nome', nomeProduto);
+  myNewObject.set('decricao', descricaoProduto);
+  myNewObject.set('preco', precoProduto);
+  try {
+    const result = await myNewObject.save();
+    // Access the Parse Object attributes using the .GET method
+    console.log('Produto criado com sucesso', result);
+		window.location.href = '../telas/sucesso.html';		
+  } catch (error) {
+    console.error('Error while creating Cliente: ', error);
+		window.location.href = '../telas/erro.html';
+  }
+});
+
+</script>
+
+</body>
+</html>

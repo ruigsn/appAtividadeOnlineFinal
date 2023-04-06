@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listar clientes</title>
+  <link rel="stylesheet" href="../assets/css/listar_funcionarios.css">
+  <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Meu aplicativo - Funcionarios</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Início</a></li>
+      <li><a href="../telas/clientes.html">Clientes</a></li>
+      <li><a href="../telas/produtos.html">Produtos</a></li>
+      <li><a href="../telas/compras.html">Compras</a></li>
+      <li><a href="../telas/funcionarios.html">Funcionarios</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h2> Funcionarios</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </main>
+  <script>
+    Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
+    // Remember to inform BOTH the Back4App Application ID AND the JavaScript KEY
+    Parse.initialize(
+      'sIdnfotzGcpvsSYLgKVYehWTFAtEpVs9uC6N6ciH', // This is your Application ID
+      'HhMUQhtryM2RuNR4drEV0jfU4kBDwaVA4eDjOMZw' // This is your Javascript key
+    );
+
+    (async () => {
+      const Funcionario = Parse.Object.extend('Funcionario');
+      const query = new Parse.Query(Funcionario);
+      try {
+        const results = await query.find();
+        const tableBody = document.querySelector('tbody');
+        for (const object of results) {
+          const id = object.id;
+          const nome = object.get('nome');
+          const email = object.get('email');
+          const row = `
+            <tr>
+              <td>${id}</td>
+              <td>${nome}</td>
+              <td>${email}</td>
+              <td><button onclick="deleteFuncionario('${id}')">Excluir</button></td>
+            </tr>
+          `;
+          tableBody.innerHTML += row;
+        }
+      } catch (error) {
+        console.error('Error while fetching Funcionario', error);
+      }
+    })();
+
+    async function deleteFuncionario(id) {
+      const Funcionario = Parse.Object.extend('Funcionario');
+      const query = new Parse.Query(Funcionario);
+      try {
+        const object = await query.get(id);
+        await object.destroy();
+        location.reload();
+      } catch (error) {
+        console.error('Error while deleting Funcionario', error);
+      }
+    }
+
+  </script>
+  <footer>
+    <p>Desenvolvido por Equipe ADS</p>
+  </footer>
+</body>
+
+</html>

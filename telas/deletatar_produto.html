@@ -1,0 +1,18 @@
+const produtoFormulario = document.getElementById('produtoFormulario');
+const objectId = // Insira aqui o ID do objeto que deseja excluir;
+
+produtoFormulario.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const myObject = new Parse.Object('Produto');
+  myObject.set('objectId', objectId); // Define o ID do objeto que deseja excluir
+
+  try {
+    const result = await myObject.destroy({ useMasterKey: true }); // Configura o método DELETE
+    console.log('Produto excluído com sucesso', result);
+    window.location.href = '../telas/sucesso.html';
+  } catch (error) {
+    console.error('Error while deleting Produto: ', error);
+    window.location.href = '../telas/erro.html';
+  }
+});

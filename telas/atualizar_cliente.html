@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Aplicação - Atualizar Funcionario</title>
+  <link rel="stylesheet" href="../assets/css/cadastrar_funcionarios.css">
+  <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Minha Aplicação - Atualizar Funcionario</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="clientes.html">Clientes</a></li>
+      <li><a href="produtos.html">Produtos</a></li>
+      <li><a href="compras.html">Compras</a></li>
+      <li><a href="funcionarios.html">Funcionarios</li>
+    </ul>
+  </nav>
+  <main>
+    <h2>Atualizar Funcionario</h2>
+    <form id="meuFormulario" action="" method="put">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <input type="hidden" id="id" name="id">
+
+      <button type="submit">Atualizar</button>
+    </form>
+  </main>
+  <footer>
+    <p>Desenvolvido por Equipe ADS</p>
+  </footer>
+
+  <script>
+    Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
+    // Remember to inform BOTH the Back4App Application ID AND the JavaScript KEY
+    Parse.initialize(
+      'sIdnfotzGcpvsSYLgKVYehWTFAtEpVs9uC6N6ciH', // This is your Application ID
+      'HhMUQhtryM2RuNR4drEV0jfU4kBDwaVA4eDjOMZw' // This is your Javascript key
+    );
+
+    const meuFormulario = document.getElementById('meuFormulario');
+
+    meuFormulario.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const nomeFuncionario = document.getElementById('nome').value;
+      const emailFuncionario = document.getElementById('email').value;
+      const idFuncionario = document.getElementById('id').value;
+
+      const myNewObject = new Parse.Object('Funcionario');
+      myNewObject.set('objectId', idFuncionario); // set the objectId to update the existing object
+      myNewObject.set('nome', nomeFuncionario);
+      myNewObject.set('email', emailFuncionario);
+      try {
+        const result = await myNewObject.save(null, {method: 'PUT'});
+        // Access the Parse Object attributes using the .GET method
+        console.log('Funcionario criado com sucesso', result);
+        window.location.href = '../telas/sucesso.html';
+      } catch (error) {
+        console.error('Error while creating Funcionario: ', error);
+        window.location.href = '../telas/erro.html';
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>

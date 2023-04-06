@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro não realizado</title>
+  <link rel="stylesheet" href="../assets/css/erro.css">
+</head>
+
+<body>
+  <header>
+    <h1>Minha Aplicação - Cadastrar Cliente</h1>
+  </header>
+  <main>
+    <div class="error-message">Erro ao realizar cadastro!</div>
+    <div class="button-wrapper">
+      <button type="button" onclick="voltar()">Voltar</button>
+      <button type="button" onclick="sair()">Sair</button>
+    </div>
+  </main>
+  <script>
+    function voltar() {
+      window.location.href = "cadastrar_cliente.html";
+    }
+
+    function sair() {
+      window.location.href = "../index.html";
+    }
+  </script>
+
+</body>
+
+</html>
